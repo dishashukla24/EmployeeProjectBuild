@@ -42,16 +42,16 @@ public class TraineeServiceImpl implements ITraineeService {
 	        return null;
 	    }
 
-	   
-
-	    @Override
+	   @Override
 	    public List<Trainee> getAllTrainees() {
 	        return repo.findAll();
 	    }
 
 		@Override
 		public Optional<Trainee> getTrainee(int id) {
-			return repo.findById(id);
+			Optional<Trainee> op = repo.findById(id);
+			if(op!=null) return op;
+			else throw new TraineeNotFoundException();
 			
 		}
 
@@ -60,6 +60,7 @@ public class TraineeServiceImpl implements ITraineeService {
 			return repo.findBytraineeName(name);
 		
 		}
+	
 	
 	
 
