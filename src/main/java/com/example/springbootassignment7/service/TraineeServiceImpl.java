@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.springbootassignment7.Exception.TraineeNotFoundException;
 import com.example.springbootassignment7.entities.Trainee;
 import com.example.springbootassignment7.repo.ITraineeRepo;
-import com.example.springbootassignment7.Exception.TraineeNotFoundException;
 
 
 @Service
@@ -43,25 +43,26 @@ public class TraineeServiceImpl implements ITraineeService {
 	        return null;
 	    }
 
-	   @Override
+	   
+
+	    @Override
 	    public List<Trainee> getAllTrainees() {
 	        return repo.findAll();
 	    }
 
-		@Override
-		public Optional<Trainee> getTrainee(int id) {
-			Optional<Trainee> op = repo.findById(id);
-			if(op!=null) return op;
-			else throw new TraineeNotFoundException();
-			
-		}
-
+	    @Override
+	    public Optional<Trainee> getTrainee(int id) {
+	        return repo.findById(id)
+	                .or(() -> {
+	                    throw new TraineeNotFoundException();
+	                });
+	    }
+	    
 		@Override
 		public Optional<Trainee> findBytraineeName(String name) {
 			return repo.findBytraineeName(name);
 		
 		}
-	
 	
 	
 
