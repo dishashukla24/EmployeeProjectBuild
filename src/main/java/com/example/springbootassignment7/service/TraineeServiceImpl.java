@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springbootassignment7.entities.Trainee;
 import com.example.springbootassignment7.repo.ITraineeRepo;
+import com.example.springbootassignment7.Exception.TraineeNotFoundException;
 
 
 @Service
